@@ -26,11 +26,15 @@ bot.dialog('/', [
     },
     function (session, results) {
         session.userData.name = results.response;
-        builder.Prompts.number(session, "Hi " + results.response + ", How many years have you been coding?"); 
+        //builder.Prompts.number(session, "Hi " + results.response + ", How many years have you been coding?"); 
+        builder.Prompts.attachment(session, "Can you attach a screeshot that will help me better understanbd your request? [attach an image or just type 'NO']");
+
     },
     function (session, results) {
         session.userData.coding = results.response;
-        builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
+        var thumbnailUrl = results.response[0].thumbnailUrl;
+        session.send(thumbnailUrl);
+        //builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
     },
     function (session, results) {
         session.userData.language = results.response.entity;
