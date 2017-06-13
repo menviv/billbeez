@@ -34,11 +34,35 @@ bot.dialog('/', [
         //session.userData.coding = results.response;
         //var contentUrl = results.response[0].contentUrl;
         //var pictureLength = results.response.length;
-        var msg = session.message;
-        var attachment = msg.attachments[0];
-        var contentUrl = attachment.contentUrl
-        session.send('attachment: ', attachment);
+        //var msg = session.message;
+        //var attachment = msg.attachments[0];
+        //var contentUrl = attachment.contentUrl
+        //session.send('attachment: ', attachment);
         //builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
+
+            var msg = session.message;
+            if (msg.attachments && msg.attachments.length > 0) {
+            // Echo back attachment
+            var attachment = msg.attachments[0];
+                session.send({
+                    text: "You sent:",
+                    attachments: [
+                        {
+                            contentType: attachment.contentType,
+                            contentUrl: attachment.contentUrl,
+                            name: attachment.name
+                        }
+                    ]
+                });
+            } else {
+                // Echo back users text
+                session.send("You said: %s", session.message.text);
+            }
+
+
+
+
+
     },
     function (session, results) {
         session.userData.language = results.response.entity;
