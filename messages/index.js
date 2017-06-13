@@ -127,7 +127,32 @@ bot.dialog('/', [
 ]);
 
 
+bot.dialog('resetDialog', function (session, args) {
 
+    if (args.topic == 'ResetPassword') {
+
+        session.endDialog();
+
+        session.beginDialog("/");
+
+    }
+
+}).triggerAction({ 
+    onFindAction: function (context, callback) {
+        // Recognize users utterance
+        switch (context.message.text.toLowerCase()) {
+            case '/reset':
+                // You can trigger the action with callback(null, 1.0) but you're also
+                // allowed to return additional properties which will be passed along to
+                // the triggered dialog.
+                callback(null, 1.0, { topic: 'ResetPassword' });
+                break;
+            default:
+                callback(null, 0.0);
+                break;
+        }
+    } 
+});
 
 
 
