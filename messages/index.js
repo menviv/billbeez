@@ -58,7 +58,7 @@ bot.dialog('/', [
             var url = attachment.contentUrl;
 
             var options = {
-                directory: "/images/cats/",
+                directory: "/images",
                 filename: attachment.name
             }
 
