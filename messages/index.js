@@ -33,7 +33,8 @@ bot.dialog('/', [
     function (session, results) {
         session.userData.coding = results.response;
         var contentUrl = results.response[0].contentUrl;
-        session.send('contentUrl: ', contentUrl);
+        var picture = session.message.attachments[0];
+        session.send('picture: ', picture);
         //builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
     },
     function (session, results) {
