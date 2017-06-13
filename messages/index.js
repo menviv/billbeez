@@ -58,14 +58,15 @@ bot.dialog('/', [
             var url = attachment.contentUrl;
 
             var options = {
-                directory: "./images/cats/",
+                directory: "/images/cats/",
                 filename: attachment.name
             }
 
 
             download(url, options, function(err){
                 if (err) throw err
-                console.log("meow")
+                //console.log("meow")
+                session.send("dddddd:" + attachment.contentUrl);
             });
 
             /*
