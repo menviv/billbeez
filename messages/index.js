@@ -31,10 +31,13 @@ bot.dialog('/', [
 
     },
     function (session, results) {
-        session.userData.coding = results.response;
-        var contentUrl = results.response[0].contentUrl;
-        var pictureLength = results.response.length;
-        session.send('pictureLength: ', pictureLength);
+        //session.userData.coding = results.response;
+        //var contentUrl = results.response[0].contentUrl;
+        //var pictureLength = results.response.length;
+        var msg = session.message;
+        var attachment = msg.attachments[0];
+        var contentUrl = attachment.contentUrl
+        session.send('contentUrl: ', contentUrl);
         //builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
     },
     function (session, results) {
