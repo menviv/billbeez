@@ -5,6 +5,11 @@ https://docs.botframework.com/en-us/node/builder/chat/dialogs/#waterfall
 -----------------------------------------------------------------------------*/
 "use strict";
 var builder = require("botbuilder");
+
+var Promise = require('bluebird');
+var request = require('request-promise').defaults({ encoding: null });
+
+
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
 
