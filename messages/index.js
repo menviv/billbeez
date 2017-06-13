@@ -44,7 +44,7 @@ bot.dialog('/', [
             if (msg.attachments && msg.attachments.length > 0) {
             // Echo back attachment
             var attachment = msg.attachments[0];
-            session.send("dddddd:", attachment.contentUrl);
+            session.send("dddddd:" + attachment.contentUrl);
                 session.send({
                     text: "You sent:",
                     attachments: [
