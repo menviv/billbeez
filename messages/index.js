@@ -95,7 +95,7 @@ bot.dialog('/', [
                     console.log('Error downloading attachment:', { statusCode: err.statusCode, message: err.response.statusMessage });
                 });
 
-                blobSvc.createBlockBlobFromLocalFile('images', attachment.contentUrl, attachment.name, function(error, result, response){
+                blobSvc.createBlockBlobFromLocalFile('images', afileDownload, attachment.name, function(error, result, response){
                 if(!error){
                     // file uploaded
                 }
