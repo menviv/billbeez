@@ -115,9 +115,11 @@ bot.dialog('/', [
                     // file uploaded
                 }
                 });
+
+                */
         }
 
-*/
+
 
 
     }
