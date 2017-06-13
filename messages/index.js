@@ -37,7 +37,7 @@ bot.dialog('/', [
         var msg = session.message;
         var attachment = msg.attachments[0];
         var contentUrl = attachment.contentUrl
-        session.send('contentUrl: ', contentUrl);
+        session.send('attachment: ', attachment);
         //builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
     },
     function (session, results) {
