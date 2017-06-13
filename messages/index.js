@@ -11,6 +11,7 @@ var request = require('request-promise').defaults({ encoding: null });
 
 var azure = require('azure-storage');
 var blobSvc = azure.createBlobServiceAnonymous('https://gtechdevdata.blob.core.windows.net/');
+var download = require('download-file');
 
 
 var botbuilder_azure = require("botbuilder-azure");
@@ -48,12 +49,26 @@ bot.dialog('/', [
         //session.send('attachment: ', attachment);
         //builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
 
-/*
+
             var msg = session.message;
             if (msg.attachments && msg.attachments.length > 0) {
             // Echo back attachment
             var attachment = msg.attachments[0];
             session.send("dddddd:" + attachment.contentUrl);
+            var url = attachment.contentUrl;
+
+            var options = {
+                directory: "./images/cats/",
+                filename: attachment.name
+            }
+
+
+            download(url, options, function(err){
+                if (err) throw err
+                console.log("meow")
+            });
+
+            /*
                 session.send({
                     text: "You sent:",
                     attachments: [
@@ -71,7 +86,7 @@ bot.dialog('/', [
 
 */
 
-
+/*
 
         var msg = session.message;
         if (msg.attachments.length) {
@@ -102,6 +117,7 @@ bot.dialog('/', [
                 });
         }
 
+*/
 
 
     }
