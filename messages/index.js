@@ -40,6 +40,7 @@ bot.dialog('/', [
         //session.send('attachment: ', attachment);
         //builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
 
+/*
             var msg = session.message;
             if (msg.attachments && msg.attachments.length > 0) {
             // Echo back attachment
@@ -60,18 +61,68 @@ bot.dialog('/', [
                 session.send("You said: %s", session.message.text);
             }
 
+*/
 
 
 
+        var msg = session.message;
+        if (msg.attachments.length) {
 
-    },
-    function (session, results) {
-        session.userData.language = results.response.entity;
-        session.send("Got it... " + session.userData.name + 
-                    " you've been programming for " + session.userData.coding + 
-                    " years and use " + session.userData.language + ".");
+            // Message with attachment, proceed to download it.
+            // Skype & MS Teams attachment URLs are secured by a JwtToken, so we need to pass the token from our bot.
+            var attachment = msg.attachments[0];
+            var fileDownload = checkRequiresToken(msg)
+                ? requestWithToken(attachment.contentUrl)
+                : request(attachment.contentUrl);
+
+            fileDownload.then(
+                function (response) {
+
+                    // Send reply with attachment type & size
+                    var reply = new builder.Message(session)
+                        .text('Attachment of %s type and size of %s bytes received.', attachment.contentType, response.length);
+                    session.send(reply);
+
+                }).catch(function (err) {
+                    console.log('Error downloading attachment:', { statusCode: err.statusCode, message: err.response.statusMessage });
+                });
+        }
+
+
+
     }
 ]);
+
+
+
+
+
+
+// Helper methods
+
+// Request file with Authentication Header
+var requestWithToken = function (url) {
+    return obtainToken().then(function (token) {
+        return request({
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/octet-stream'
+            }
+        });
+    });
+};
+
+// Promise for obtaining JWT Token (requested once)
+var obtainToken = Promise.promisify(connector.getAccessToken.bind(connector));
+
+var checkRequiresToken = function (message) {
+    return message.source === 'skype' || message.source === 'msteams';
+};
+
+
+
+
 
 if (useEmulator) {
     var restify = require('restify');
