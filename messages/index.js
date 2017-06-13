@@ -9,6 +9,9 @@ var builder = require("botbuilder");
 var Promise = require('bluebird');
 var request = require('request-promise').defaults({ encoding: null });
 
+var azure = require('azure-storage');
+var blobSvc = azure.createBlobServiceAnonymous('https://gtechdevdata.blob.core.windows.net/');
+
 
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
@@ -91,6 +94,12 @@ bot.dialog('/', [
                 }).catch(function (err) {
                     console.log('Error downloading attachment:', { statusCode: err.statusCode, message: err.response.statusMessage });
                 });
+
+                blobSvc.createBlockBlobFromLocalFile('images', attachment.contentUrl, attachment.name, function(error, result, response){
+                if(!error){
+                    // file uploaded
+                }
+                });
         }
 
 
@@ -139,3 +148,6 @@ if (useEmulator) {
 } else {
     module.exports = { default: connector.listen() }
 }
+
+
+
