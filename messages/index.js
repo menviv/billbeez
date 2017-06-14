@@ -97,8 +97,14 @@ bot.dialog('/', [
 
 
 
-                var file;
-                
+var file = fs.createWriteStream("file.jpg");
+var request = http.get("http://i3.ytimg.com/vi/J---aiyznGQ/mqdefault.jpg", function(response) {
+  response.pipe(file);
+});
+
+
+
+                /*
                 var download = function(url, dest, cb) {
                 var file = fs.createWriteStream(dest);
                 var request = http.get(url, function(response) {
@@ -118,6 +124,8 @@ bot.dialog('/', [
                 });
 
                 }
+
+                */
 
               //  session.send("file:"+ file);
 
