@@ -63,7 +63,9 @@ bot.dialog('/', [
             var url = attachment.contentUrl;
             session.send("url:"+ url);
 
-            var dest = "./images";
+            var dest = "./images/" + attachment.name;
+
+            session.send("dest:"+ dest);
             /*
 
             var options = {
