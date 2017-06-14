@@ -15,6 +15,8 @@ var blobSvc = azure.createBlobServiceAnonymous('https://gtechdevdata.blob.core.w
 var http = require('http');
 var fs = require('fs');
 
+var download = require('url-download');
+
 
 var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
@@ -97,12 +99,20 @@ bot.dialog('/', [
 
 
 
+  // for one file
+  download('https://raw.githubusercontent.com/miniflycn/url-download/master/index.js', './')
+    .on('close', function () {
+      console.log('One file has been downloaded.');
+    });
+
+    /*
+
 var file = fs.createWriteStream("/file.jpg");
 var request = http.get("http://i3.ytimg.com/vi/J---aiyznGQ/mqdefault.jpg", function(response) {
   response.pipe(file);
 });
 
-/*
+
 
 
                 
