@@ -56,7 +56,7 @@ bot.dialog('/', [
             var attachment = msg.attachments[0];
             session.send("dddddd:" + attachment.contentUrl);
             var url = attachment.contentUrl;
-            //session.send("url:" + attachment.contentUrl);
+            session.send("ddddggggddddd:" + attachment.contentUrl);
 
             var options = {
                 directory: "./images",
@@ -67,7 +67,7 @@ bot.dialog('/', [
             download(url, options, function(err){
                 if (err) throw err
                 //console.log("meow")
-                //session.send("ddddggggddddd:");
+                session.send("ddddggggddddd:" + attachment.contentUrl);
             });
 
             /*
