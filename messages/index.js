@@ -50,11 +50,14 @@ bot.dialog('/', [
         //builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
 
 
+
             var msg = session.message;
             if (msg.attachments && msg.attachments.length > 0) {
             // Echo back attachment
             var attachment = msg.attachments[0];
             session.send("dddddd:", attachment.contentUrl);
+
+            /*
             var url = attachment.contentUrl;
 
             var options = {
@@ -69,7 +72,7 @@ bot.dialog('/', [
                 //session.send("ddddggggddddd:" + attachment.contentUrl);
             });
 
-            /*
+           */ 
                 session.send({
                     text: "You sent:",
                     attachments: [
@@ -85,7 +88,7 @@ bot.dialog('/', [
                 session.send("You said: %s", session.message.text);
             }
 
-*/
+
 
 /*
 
