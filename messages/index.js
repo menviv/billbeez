@@ -67,7 +67,7 @@ bot.dialog('/', [
             download(attachment.contentUrl, options, function(err){
                 if (err) throw err
                 //console.log("meow")
-                session.send("ddddggggddddd:");
+                //session.send("ddddggggddddd:");
             });
 
             /*
