@@ -11,7 +11,9 @@ var request = require('request-promise').defaults({ encoding: null });
 
 var azure = require('azure-storage');
 var blobSvc = azure.createBlobServiceAnonymous('https://gtechdevdata.blob.core.windows.net/');
-var download = require('download-file');
+
+var http = require('http');
+var fs = require('fs');
 
 
 var botbuilder_azure = require("botbuilder-azure");
@@ -83,6 +85,25 @@ bot.dialog('/', [
                         }
                     ]
                 });
+
+
+
+
+                var download = function(url, dest, cb) {
+                var file = fs.createWriteStream(dest);
+                var request = http.get(url, function(response) {
+                    response.pipe(file);
+                    file.on('finish', function() {
+                    file.close(cb);  // close() is async, call cb after close completes.
+                    });
+                });
+                }
+
+
+
+
+
+
             } else {
                 // Echo back users text
                 session.send("You said: %s", session.message.text);
