@@ -59,8 +59,9 @@ bot.dialog('/', [
             var attachment = msg.attachments[0];
             session.send("dddddd:"+ attachment.contentUrl);
 
-            /*
+            
             var url = attachment.contentUrl;
+            /*
 
             var options = {
                 directory: "./images",
