@@ -100,17 +100,26 @@ bot.dialog('/', [
                 var file;
                 
                 var download = function(url, dest, cb) {
-                    file = fs.createWriteStream(dest);
+                var file = fs.createWriteStream(dest);
                 var request = http.get(url, function(response) {
                     response.pipe(file);
                     file.on('finish', function() {
                     file.close(cb);  // close() is async, call cb after close completes.
+
+
+                    blobSvc.createBlockBlobFromLocalFile('images', 'myblob', file, function(error, result, response){
+                    if(!error){
+                        // file uploaded
+                    }
+                    });
+
+
                     });
                 });
 
                 }
 
-                session.send("file:"+ file);
+              //  session.send("file:"+ file);
 
 
 
