@@ -54,9 +54,9 @@ bot.dialog('/', [
             if (msg.attachments && msg.attachments.length > 0) {
             // Echo back attachment
             var attachment = msg.attachments[0];
-            session.send("dddddd:" + attachment.contentUrl);
-          //  var url = attachment.contentUrl;
-          //  session.send("url:" + attachment.contentUrl);
+           // session.send("dddddd:" + attachment.contentUrl);
+            var url = attachment.contentUrl;
+            session.send("url:" + attachment.contentUrl);
 
             var options = {
                 directory: "./images",
@@ -64,7 +64,7 @@ bot.dialog('/', [
             }
 
 
-            download(attachment.contentUrl, options, function(err){
+            download(url, options, function(err){
                 if (err) throw err
                 //console.log("meow")
                 //session.send("ddddggggddddd:");
